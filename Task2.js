@@ -10,10 +10,10 @@ function fib(a, b) {
 		}
 		return m;
 	}
-	return 'Не число Фибоначи';
+	throw new Error('Не число Фибоначи');
 }
 
-console.log(fib(5, 5));
+console.log(fib(4, 5));
 
 function halper(num) {
 	let a = 1;
