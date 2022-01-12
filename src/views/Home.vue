@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <div v-if="loading">
-      <hello-world :arr="users"/>
+      <hello-world :arr="users" />
       <pagination :totalPage="totalPage" :page="page" @setPage="push" />
     </div>
     <div v-else>Загрузак...</div>
@@ -12,12 +12,11 @@
 import HelloWorld from "@/components/UserList.vue";
 import Pagination from "@/components/Pagination.vue";
 
-
 export default {
   name: "Home",
   components: {
     HelloWorld,
-    Pagination
+    Pagination,
   },
   data() {
     return {
@@ -25,11 +24,11 @@ export default {
       totalPage: 0,
       page: 0,
       loading: false,
-    }
+    };
   },
   methods: {
-    fetchPosts() {
-      fetch(`https://dummyapi.io/data/v1/user?page=${this.page}`, {
+    fetchPosts(page = 0) {
+      fetch(`https://dummyapi.io/data/v1/user?page=${page}`, {
         method: "GET",
         headers: {
           "app-id": "61dc300ff18a538a523e14bf",
@@ -45,23 +44,29 @@ export default {
     },
     push(item) {
       this.page = item - 1;
-      this.fetchPosts();
       window.scrollTo({
         top: 0,
-        behavior: "smooth"
+        behavior: "smooth",
       });
-    }
+    },
   },
   mounted() {
-    this.fetchPosts();
-  }
+    this.page = Number(this.$route.query.page) || 0;
+    this.fetchPosts(this.$route.query.page);
+  },
+  watch: {
+    page() {
+      this.$router.push({ query: { page: this.page } });
+      this.fetchPosts(this.page);
+    },
+  },
 };
 </script>
 
 <style scoped>
-  .home {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+.home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 </style>

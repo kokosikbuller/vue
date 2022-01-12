@@ -10,10 +10,10 @@ function fib(a, b) {
 		}
 		return m;
 	}
-	return 'Нет';
+	return 'Не число Фибоначи';
 }
 
-console.log(fib(15, 28));
+console.log(fib(5, 5));
 
 function halper(num) {
 	let a = 1;

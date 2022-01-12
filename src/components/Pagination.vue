@@ -24,7 +24,7 @@ export default {
     totalPage: {
       type: Number,
 		}
-	},
+	}
 }
 </script>
 

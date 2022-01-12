@@ -15,7 +15,7 @@ export default {
   },
   methods: {
     setId() {
-      this.$router.push({ name: "User", params: { id: this.item.id } });
+      this.$router.push({ name: "User", params: { id: this.item.id }});
     },
   }
 }
